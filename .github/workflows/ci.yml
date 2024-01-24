@@ -11,6 +11,7 @@ on:
       - 'subprojects/**'
       - 'meson.build'
       - 'meson_options.txt'
+      - '.github/workflows/ci.yml'
   workflow_dispatch:
 
 jobs:

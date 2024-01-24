@@ -21,7 +21,7 @@ int main() {
     }
     revInitGenRandom((unsigned)time(NULL));
 
-    // Iterate untill no one can put disks.
+    // Iterate until no one can put disks.
     while (revHasLegalMoves(board)) {
         int move;
         if (revGetCurrentPlayer(board) == DISK_BLACK) {
