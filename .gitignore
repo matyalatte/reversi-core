@@ -1,0 +1,27 @@
+# common files
+*.txt
+!meson_options.txt
+*.bat
+*.sh
+
+# subprojects
+subprojects/**
+!subprojects/*.wrap
+
+# built binaries
+build
+libreversi*
+*.exe
+*.dll
+*.so
+*.dylib
+
+# doxygen
+*.js
+*.png
+*.html
+!docs/doxygen/*.html
+
+docs/doxygen-awesome-css
+docs/html
+docs/latex
