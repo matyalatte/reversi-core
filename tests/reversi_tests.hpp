@@ -38,6 +38,15 @@ TEST_F(ReversiTest, revNewBoardTest) {
     EXPECT_EQ(2, revCountDisks(board, DISK_WHITE));
 }
 
+TEST_F(ReversiTest, revInitBoardTest) {
+    revMoveXY(board, 3, 2);
+    EXPECT_EQ(4, revCountDisks(board, DISK_BLACK));
+    EXPECT_EQ(1, revCountDisks(board, DISK_WHITE));
+    revInitBoard(board);
+    EXPECT_EQ(2, revCountDisks(board, DISK_BLACK));
+    EXPECT_EQ(2, revCountDisks(board, DISK_WHITE));
+}
+
 int areSameBoards(RevBoard *b1, RevBoard *b2) {
     return (revGetBitboard(b1, DISK_BLACK) == revGetBitboard(b2, DISK_BLACK)) &&
            (revGetBitboard(b1, DISK_WHITE) == revGetBitboard(b2, DISK_WHITE)) &&
@@ -61,6 +70,60 @@ TEST_F(ReversiTest, revGetCurrentPlayer) {
     EXPECT_EQ(DISK_WHITE, revGetCurrentPlayer(board));
     revChangePlayer(board);
     EXPECT_EQ(DISK_BLACK, revGetCurrentPlayer(board));
+}
+
+TEST_F(ReversiTest, revGetBitboardAsArray) {
+    int* disks = revGetBitboardAsArray(board, DISK_BLACK);
+    int count = revCountDisks(board, DISK_BLACK);
+    std::vector<int> expected = {
+        revXYToPos(4, 3),
+        revXYToPos(3, 4),
+    };
+    compareIntArray(expected, disks, count);
+    free(disks);
+
+    disks = revGetBitboardAsArray(board, DISK_WHITE);
+    count = revCountDisks(board, DISK_WHITE);
+    expected = {
+        revXYToPos(3, 3),
+        revXYToPos(4, 4),
+    };
+    compareIntArray(expected, disks, count);
+    free(disks);
+}
+
+TEST_F(ReversiTest, revGetDiskXY) {
+    RevDiskType type = revGetDiskXY(board, 3, 4);
+    EXPECT_EQ(DISK_BLACK, type);
+    type = revGetDiskXY(board, 3, 3);
+    EXPECT_EQ(DISK_WHITE, type);
+    type = revGetDiskXY(board, 2, 2);
+    EXPECT_EQ(DISK_NONE, type);
+}
+
+TEST_F(ReversiTest, revSetDiskXY) {
+    RevDiskType type = revGetDiskXY(board, 3, 4);
+    EXPECT_EQ(DISK_BLACK, type);
+    revSetDiskXY(board, DISK_WHITE, 3, 4);
+    type = revGetDiskXY(board, 3, 4);
+    EXPECT_EQ(DISK_WHITE, type);
+    EXPECT_EQ(1, revCountDisks(board, DISK_BLACK));
+    EXPECT_EQ(3, revCountDisks(board, DISK_WHITE));
+    revSetDiskXY(board, DISK_BLACK, 3, 4);
+    type = revGetDiskXY(board, 3, 4);
+    EXPECT_EQ(DISK_BLACK, type);
+    EXPECT_EQ(2, revCountDisks(board, DISK_BLACK));
+    EXPECT_EQ(2, revCountDisks(board, DISK_WHITE));
+}
+
+TEST_F(ReversiTest, revSetDiskNone) {
+    RevDiskType type = revGetDiskXY(board, 3, 4);
+    EXPECT_EQ(DISK_BLACK, type);
+    revSetDiskXY(board, DISK_NONE, 3, 4);
+    type = revGetDiskXY(board, 3, 4);
+    EXPECT_EQ(DISK_NONE, type);
+    EXPECT_EQ(1, revCountDisks(board, DISK_BLACK));
+    EXPECT_EQ(2, revCountDisks(board, DISK_WHITE));
 }
 
 TEST_F(ReversiTest, revGetMobility) {
@@ -214,6 +277,20 @@ static int inArray(int elm, int *array, int size) {
         found |= (ap[0] == elm);
     }
     return found;
+}
+
+TEST_F(ReversiTest, revIsLegalMoveXY) {
+    EXPECT_TRUE(revIsLegalMoveXY(board, 3, 2));
+    EXPECT_TRUE(revIsLegalMoveXY(board, 2, 3));
+    EXPECT_TRUE(revIsLegalMoveXY(board, 5, 4));
+    EXPECT_TRUE(revIsLegalMoveXY(board, 4, 5));
+    EXPECT_FALSE(revIsLegalMoveXY(board, 2, 2));
+    EXPECT_FALSE(revIsLegalMoveXY(board, 0, 7));
+}
+
+TEST_F(ReversiTest, revPrintBoard) {
+    // Just test if it will raise errors or not.
+    revPrintBoard(board);
 }
 
 TEST_F(ReversiTest, revGenMoveRandom) {

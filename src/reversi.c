@@ -148,7 +148,17 @@ RevDiskType revGetWinner(RevBoard *board) {
 }
 
 void revSetDisk(RevBoard *board, RevDiskType disk_type, int pos) {
-    const RevBitboard mask = (RevBitboard)1 << pos;
+    RevBitboard mask = (RevBitboard)1 << pos;
+
+    // Unpopulate the specified bit
+    board->bitboards[DISK_BLACK] &= ~mask;
+    board->bitboards[DISK_WHITE] &= ~mask;
+
+    // Set zeros when disk_type == DISK_NONE
+    mask *= (disk_type != DISK_NONE);
+    disk_type *= (disk_type != DISK_NONE);
+
+    // Populate the specified bit
     board->bitboards[disk_type] |= mask;
 }
 
@@ -159,7 +169,7 @@ void revSetDiskXY(RevBoard *board, RevDiskType disk_type, int x, int y) {
 RevDiskType revGetDisk(RevBoard *board, int pos) {
     uint8_t has_black = revIsTrueAt(board->bitboards[DISK_BLACK], pos);
     uint8_t has_white = revIsTrueAt(board->bitboards[DISK_WHITE], pos);
-    return has_white + !(has_black || has_white) * 2;
+    return has_white + (!(has_black || has_white)) * DISK_NONE;
 }
 
 RevDiskType revGetDiskXY(RevBoard *board, int x, int y) {

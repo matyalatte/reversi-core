@@ -140,7 +140,11 @@ TEST(BitboardTest, revArrayToBitboard) {
 
     for (auto c : cases) {
         RevBitboard expected = c.first;
-        RevBitboard b = revArrayToBitboard(&c.second[0], c.second.size());
+        int* ptr = NULL;
+        if (c.second.size() != 0) {
+            ptr = &c.second[0];
+        }
+        RevBitboard b = revArrayToBitboard(ptr, c.second.size());
         EXPECT_EQ(expected, b);
     }
 }
