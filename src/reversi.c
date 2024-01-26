@@ -65,8 +65,7 @@ int *revBitboardToArray(RevBitboard b) {
 
 RevBitboard revArrayToBitboard(int *array, int size) {
     RevBitboard b = 0;
-    int *aptr = array;
-    for (; aptr < array + size; aptr++) {
+    for (int *aptr = array; aptr < array + size; aptr++) {
         b |= (RevBitboard)1 << aptr[0];
     }
     return b;
@@ -361,8 +360,8 @@ int revGenMoveMonteCarlo(RevBoard *board, int trials) {
     int max_win = 0;
     int best_move = ma[0];
     trials /= mobility_count;
-    int *mptr = ma;
-    for (; mptr < ma + mobility_count; mptr++) {
+
+    for (int *mptr = ma; mptr < ma + mobility_count; mptr++) {
         int m = mptr[0];
         revCopyBoard(board, tmp_board);
         revMove(tmp_board, m);

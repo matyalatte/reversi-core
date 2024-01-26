@@ -322,10 +322,11 @@ TEST_F(ReversiTest, revGenMoveMonteCarlo) {
     int monte_win = 0;
     int random_win = 0;
     for (int i = 0; i < 10; i++) {
+        revInitBoard(board);
         while (revHasLegalMoves(board)) {
             int move;
             if (revGetCurrentPlayer(board) == DISK_BLACK) {
-                move = revGenMoveMonteCarlo(board, 5000);
+                move = revGenMoveMonteCarlo(board, 500);
             } else {
                 move = revGenMoveRandom(board);
             }
