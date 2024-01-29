@@ -22,7 +22,7 @@ extern "C" {
 #define REV_VERSION_INT 100
 
 /**
- * Get the version of reversi-core.
+ * Gets the version of reversi-core.
  * It should be of the form `x.x.x`.
  * 
  * @returns A string that represents the version.
@@ -30,7 +30,7 @@ extern "C" {
 _REV_EXTERN const char* revGetVersion();
 
 /**
- * Get the version of reversi-core as an integer.
+ * Gets the version of reversi-core as an integer.
  * The value should be `major * 100 + minor * 100 + patch`.
  * If `revGetVersion() == "1.2.3"` then `revGetVersionAsInt() == 10203`.
  * 
@@ -92,7 +92,7 @@ _REV_EXTERN int revIsTrueAt(RevBitboard b, int pos);
 _REV_EXTERN int revIsTrueAtXY(RevBitboard b, int x, int y);
 
 /**
- * Convert a bitboard to an array of positions.
+ * Converts a bitboard to an array of positions.
  * 
  * @note Arrays that are returned from this method should be freed with free().
  * 
@@ -102,7 +102,7 @@ _REV_EXTERN int revIsTrueAtXY(RevBitboard b, int x, int y);
 _REV_EXTERN int* revBitboardToArray(RevBitboard b);
 
 /**
- * Create a bitboard from an array of positions.
+ * Creates a bitboard from an array of positions.
  * @param array An array of positions on a bitboard.
  * @param size The size of the array.
  * @returns A bitboard.

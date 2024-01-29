@@ -121,10 +121,10 @@ You can get a disk from a board.
 
 ```c
 // Get a disk at (4, 1)
-RevDiskType = revGetDiskXY(board, 4, 1);
-if (RevDiskType == DISK_BLACK) {
+RevDiskType disk_type = revGetDiskXY(board, 4, 1);
+if (disk_type == DISK_BLACK) {
     // Black
-} else if (RevDiskType == DISK_WHITE) {
+} else if (disk_type == DISK_WHITE) {
     // White
 } else {
     // Empty
@@ -147,7 +147,7 @@ if (revIsLegalMoveXY(board, 4, 2)) {
 
 ```c
 // Set a disk to (2, 3) and get flipped disks
-Bitboard flipped = revMoveXY(board, 2, 3);
+RevBitboard flipped = revMoveXY(board, 2, 3);
 int *flipped_array = revBitboardToArray(flipped);
 for (int i = 0; i < revCountOnes(flipped); i++) {
     int pos = flipped_array[i];
