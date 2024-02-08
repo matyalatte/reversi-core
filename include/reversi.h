@@ -39,7 +39,7 @@ _REV_EXTERN const char* revGetVersion();
 _REV_EXTERN int revGetVersionAsInt();
 
 /**
- * Type for a bitboard. It's actualy a 64bit uint.
+ * Type for a bitboard. It's actually a 64bit uint.
  *
  * @typedef RevBitboard
  */
@@ -431,7 +431,7 @@ _REV_EXTERN void revMoveRandomToEnd(RevBoard *board);
  * 
  * @note This method requires revInitGenRandom() before calling.
  * 
- * @warning This is the Monte Carlo Serach, not MCTS.
+ * @warning This is the Monte Carlo Search, not MCTS.
  * 
  * @param board RevBoard instance
  * @param trials How many times this function plays the game from the current state to the end.

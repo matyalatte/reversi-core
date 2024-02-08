@@ -245,3 +245,10 @@ int main() {
     return 0;
 }
 ```
+
+### GUI App
+
+There is a GUI demo for reversi-core.  
+[matyalatte/libui-reversi-demo: Demo app to play reversi using libui-ng and reversi-core](https://github.com/matyalatte/libui-reversi-demo)  
+
+![GUI app](https://github.com/matyalatte/reversi-core/assets/69258547/6e7ce0f6-d1b2-4161-921c-ad2e6f62b103)

@@ -331,7 +331,7 @@ int revGenMoveRandom(RevBoard *board) {
     int i = -1;
     // Get the position of the Nth poplated bit.
     do {
-        n -= (m & 1);  // Substract 1 if found a populated bit.
+        n -= (m & 1);  // Subtract 1 if found a populated bit.
         m >>= 1;
         i++;
     } while (n >= 0);
